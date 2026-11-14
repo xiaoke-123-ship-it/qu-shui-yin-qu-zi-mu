@@ -1,0 +1,1 @@
+{"dependencies":{"bcryptjs":"^2.4.3","express":"^4.19.2","pg":"^8.12.0"},"description":"去字幕 · 去水印 — 积分制去水印/去字幕/图片生成网站（前台 + 管理后台 + 小程序版共用同一后台）","engines":{"node":">=18"},"main":"server.js","name":"qu-shui-yin-qu-zi-mu","scripts":{"start":"node server.js"},"version":"1.0.0"}
