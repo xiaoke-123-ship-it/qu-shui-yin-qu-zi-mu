@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>去字幕 · 去水印</title>
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<!-- ============ 前台 ============ -->
+<div id="site" class="layout">
+  <aside class="sidebar" id="sidebar">
+    <div class="brand"><span class="logo">🎬</span>去字幕 · 去水印</div>
+    <nav class="nav" id="sideNav"></nav>
+    <div class="side-foot" id="sideFoot"></div>
+  </aside>
+  <div class="main">
+    <header class="topbar">
+      <div style="display:flex;align-items:center;gap:6px">
+        <button class="hamburger" id="hamburger" aria-label="打开菜单">☰</button>
+        <span class="crumb" id="crumb">首页</span>
+      </div>
+      <div class="acts" id="topActs"></div>
+    </header>
+    <main class="content" id="content"></main>
+  </div>
+</div>
+
+<!-- 手机抽屉 -->
+<div id="drawerBg" class="drawer-bg hidden"></div>
+<aside class="drawer" id="drawer">
+  <div class="d-head"><span>去字幕 · 去水印</span><button id="drawerClose">✕</button></div>
+  <nav class="nav" id="drawerNav"></nav>
+  <div class="d-foot" id="drawerFoot"></div>
+</aside>
+
+<!-- ============ 小程序版 ============ -->
+<div id="miniapp" class="miniapp hidden">
+  <div class="m-top">去字幕 · 去水印</div>
+  <div class="m-body" id="miniBody"></div>
+  <nav class="tabbar" id="miniTabs"></nav>
+</div>
+
+<!-- ============ 管理后台 ============ -->
+<div id="admin" class="admin hidden">
+  <button class="hamburger" id="adminBurger" style="position:fixed;top:10px;left:10px;z-index:96;background:#fff;border:1px solid var(--line);border-radius:10px">☰</button>
+  <nav class="admin-nav" id="adminNav"></nav>
+  <main class="admin-main" id="adminMain"></main>
+</div>
+
+<!-- ============ 登录/注册弹窗 ============ -->
+<div id="authModal" class="modal-bg hidden">
+  <div class="modal">
+    <button class="x" id="authClose">✕</button>
+    <div class="mtabs"><button id="tabLogin" class="active">登录</button><button id="tabRegister">注册</button></div>
+    <h2 id="authTitle">欢迎回来</h2>
+    <p class="msub" id="authSub">登录您的账户以继续</p>
+    <div class="err" id="authErr"></div>
+    <div class="field"><span class="ficon">✉️</span><input type="email" id="authEmail" placeholder="邮箱" autocomplete="email"></div>
+    <div class="field"><span class="ficon">🔒</span><input type="password" id="authPass" placeholder="密码" autocomplete="current-password"><button class="eye" data-eye="authPass">👁</button></div>
+    <div class="field hidden" id="confirmWrap"><span class="ficon">🔒</span><input type="password" id="authPass2" placeholder="确认密码" autocomplete="new-password"><button class="eye" data-eye="authPass2">👁</button></div>
+    <button class="btn btn-orange btn-block" id="authSubmit" style="padding:13px">登 录</button>
+    <p class="switch" id="authSwitch">还没有账户？<button id="authSwitchBtn">注册</button></p>
+  </div>
+</div>
+
+<div id="toast" class="toast hidden"></div>
+<script src="/app.js"></script>
+</body>
+</html>
