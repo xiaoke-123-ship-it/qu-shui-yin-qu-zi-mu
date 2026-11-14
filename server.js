@@ -1,7 +1,8 @@
 // 去字幕 · 去水印 — 后台服务
 // 前台 + 管理后台 + 小程序版共用同一套数据。
 // 数据库：设置了 DATABASE_URL 时用 Postgres，否则用本地 data/db.json（JSON 文件存储）。
-// 部署到 Render：Web Service + 免费 Postgres，DATABASE_URL 由 Render 自动注入。
+// 部署到 Railway：Web Service + Postgres，DATABASE_URL 由 Railway 自动注入。
+// （render.yaml 保留在仓库里，需要时可以随时回 Render 部署。）
 const express = require('express');
 const path = require('path');
 const fs = require('fs');
@@ -72,12 +73,12 @@ function defaultDb() {
   };
 }
 function loadJson() {
-  if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR, { recursive: true });
+  try { if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR, { recursive: true }); } catch (e) { /* 文件系统只读时忽略，数据只保存在内存 */ }
   if (fs.existsSync(DB_FILE)) { try { mem = JSON.parse(fs.readFileSync(DB_FILE, 'utf8')); } catch (e) { mem = defaultDb(); } }
   else mem = defaultDb();
   saveJson();
 }
-function saveJson() { if (!USE_PG) fs.writeFileSync(DB_FILE, JSON.stringify(mem, null, 2)); }
+function saveJson() { if (!USE_PG) { try { fs.writeFileSync(DB_FILE, JSON.stringify(mem, null, 2)); } catch (e) { /* 文件系统只读/不可写时忽略，数据只保存在内存 */ } } }
 
 const TABLES = {
   users: ['id', 'email', 'passwordHash', 'nickname', 'balance', 'createdAt', 'lastLoginAt', 'totalRecharged', 'totalSpent', 'useCount'],
